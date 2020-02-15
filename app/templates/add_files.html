@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>Добавление файлов</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+    <br>
+    {% if text == "add" %}
+        <a href={{ url_for('add_tests', text='Добавление вопроса', id=material_id, num=0) }}>Закончить с добавлением файлов и перейти к добавлению вопросов</a>
+    {% endif %}
+{% endblock %}

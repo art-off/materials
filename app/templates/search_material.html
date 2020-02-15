@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>Поиск сотрудника</h1>
+    <p>(Для вывода всех сотрудников оставьте поля незаполнеными)</p>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
+
+    {% if users %}
+    <h2>Найденные пользователи</h2>
+    {% for user in users %}
+        <table class="table table-hover">
+            <tr>
+            <td>
+                <a href="{{ url_for('user', id=user.id) }}">
+                    {{ user.surname }} {{ user.name }} {{ user.patronymic }}
+                </a>
+            </td>
+        </tr>
+    </table>
+    {% endfor %}
+    {% endif %}
+{% endblock %}
