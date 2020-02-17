@@ -1,7 +1,8 @@
 from datetime import date
 from flask_login import UserMixin
 from flask import url_for
-from werkzeug.security import generate_password_hash, check_password_hash
+# from werkzeug.security import generate_password_hash, check_password_hash
+from hashlib import md5
 import re
 import os
 from app import db, login, app
@@ -35,10 +36,18 @@ class User(UserMixin, db.Model):
         return f'<User {self.id} {self.name} {self.surname} {self.patronymic}>'
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        # self.password_hash = generate_password_hash(password)
+        bytes_password = bytes(password, encoding='utf-8')
+        self.password_hash = md5(bytes_password).hexdigest()
 
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        # return check_password_hash(self.password_hash, password)
+        bytes_password = bytes(password, encoding='utf-8')
+        return self.password_hash == md5(bytes_password).hexdigest()
+
+    # для апишки
+    def chech_password_hash(self, password_hash):
+        return self.password_hash == password_hash
 
 
 @login.user_loader
