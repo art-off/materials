@@ -4,8 +4,10 @@
     {% if title %}{{ title }} - Транснефть{% else %}Транснефть{% endif %}
 {% endblock %}
 
-{% block my_styles %}
+{% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <!-- Для родителя, чтобы можно было импортировать верхнюю строчку -->
+    <link href="{{bootstrap_find_resource('css/bootstrap.css', cdn='bootstrap')}}" rel="stylesheet">
 {% endblock %}
 
 {% block navbar %}
