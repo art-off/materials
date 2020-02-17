@@ -4,6 +4,10 @@
     {% if title %}{{ title }} - Транснефть{% else %}Транснефть{% endif %}
 {% endblock %}
 
+{% block my_styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+{% endblock %}
+
 {% block navbar %}
     <nav class="navbar navbar-default">
         <div class="container">

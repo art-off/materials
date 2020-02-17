@@ -10,10 +10,10 @@
         </div>
     </div>
     <br>
-    {% if text == "Редактирование вопроса" %}<a href={{ url_for('index') }}>Закончить редактирование вопросов</a>
+    {% if text == "Редактирование вопроса" %}<a class="button" href={{ url_for('index') }}>Закончить редактирование вопросов</a>
     {% else %}
     {% if num != '0' %}
-        <a href={{ url_for('index', send_email_to_everyone=1, material_id=material_id) }}>Закончить добавление материала полностью</a>
+        <a class="button" href={{ url_for('index', send_email_to_everyone=1, material_id=material_id) }}>Закончить добавление материала полностью</a>
     {% endif %}
     {% endif %}
 {% endblock %}

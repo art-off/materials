@@ -10,6 +10,6 @@
     </div>
     <br>
     {% if text == "add" %}
-        <a href={{ url_for('add_tests', text='Добавление вопроса', id=material_id, num=0) }}>Закончить с добавлением файлов и перейти к добавлению вопросов</a>
+        <a class="button" href={{ url_for('add_tests', text='Добавление вопроса', id=material_id, num=0) }}>Закончить с добавлением файлов и перейти к добавлению вопросов</a>
     {% endif %}
 {% endblock %}
