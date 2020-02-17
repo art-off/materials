@@ -1,4 +1,5 @@
 import os
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -21,3 +22,5 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'transneft.materials1234'
     MAIL_DEFAULT_SENDER = os.environ.get('MAIL_DEFAULT_SENDER') or 'transneft.materials@gmail.com'
     ADMINS = ['transneft.materials@gmail.com']
+
+    SECRET_KEYS_API = ['a609f4a1cb170982947f7de956376849']

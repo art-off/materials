@@ -28,9 +28,11 @@ class User(UserMixin, db.Model):
         return tmp
 
     def add_material(self, material_id, date):
-        if material_id not in self.parse_materials():
+        material_id = int(material_id)
+        if User.query.get(material_id) is not None and material_id not in self.parse_materials():
             self.materials += f'{material_id}:{date}' + ', '
             db.session.commit()
+        print(self.materials)
 
     def __repr__(self):
         return f'<User {self.id} {self.name} {self.surname} {self.patronymic}>'
@@ -46,8 +48,19 @@ class User(UserMixin, db.Model):
         return self.password_hash == md5(bytes_password).hexdigest()
 
     # для апишки
-    def chech_password_hash(self, password_hash):
+    def check_password_hash(self, password_hash):
         return self.password_hash == password_hash
+
+    def to_dict(self):
+        data = {
+            'id': self.id,
+            'name': self.name,
+            'surname': self.surname,
+            'patronymic': self.patronymic,
+            'email': self.email,
+            'materials': self.parse_materials()
+        }
+        return data
 
 
 @login.user_loader
@@ -132,7 +145,8 @@ class Material(db.Model):
                 'count': 0
             }
         }
-        materials = Material.query.all()
+        # changes
+        materials = Material.query.all()[::-1]
         for material in materials:
             data['items'].append(material.to_dict())
             data['_meta']['count'] += 1
@@ -179,7 +193,6 @@ class Test(db.Model):
 
     def to_dict(self):
         data = {
-            'id': self.id,
             'question': self.question,
             'answer1': self.answer1,
             'answer2': self.answer2,
