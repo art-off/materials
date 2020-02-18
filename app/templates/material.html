@@ -6,6 +6,7 @@
     <h3>{{ material.section }}</h3>
     <br>
     <p style="white-space: pre-wrap;">{{ text_doc }}</p>
+    <p>(Просмотрите текст материла на странице сверху или скачайте документ: <a href="{{ url_for('donwload', filename=name_doc) }}">{{ name_doc }}</a>)</p>
     <h4>Прикрепленные файлы</h4>
     {% for file in files %}
         <a href="{{ url_for('donwload', filename=file) }}">{{ file }}</a><br>

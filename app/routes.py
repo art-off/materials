@@ -282,12 +282,13 @@ def material(id):
     material = Material.query.get_or_404(id)
     files = material.parse_files()
     doc = docx.Document(os.path.join('app', app.config['UPLOAD_FOLDER'], files[0]))
+    name_doc = files[0]
     del files[0]
     text_doc = []
     for paragraph in doc.paragraphs:
         text_doc.append(paragraph.text)
     text_doc = '\n'.join(text_doc)
-    return render_template('material.html', material=material, text_doc=text_doc, files=files,
+    return render_template('material.html', material=material, text_doc=text_doc, name_doc=name_doc, files=files,
                             count_tests=len(material.parse_tests()))
 
 

@@ -59,6 +59,8 @@ class User(UserMixin, db.Model):
             'name': self.name,
             'surname': self.surname,
             'patronymic': self.patronymic,
+            'position': self.position,
+            'organization': self.organization,
             'email': self.email,
             'materials': self.parse_materials()
         }
