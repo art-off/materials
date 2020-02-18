@@ -71,6 +71,8 @@ def register():
                     surname=re.sub(r'\s', '', form.surname.data),
                     patronymic=re.sub(r'\s', '', form.patronymic.data),
                     email=re.sub(r'\s', '', form.email.data),
+                    position=form.position.data,
+                    organization=form.organization.data,
                     materials='')
         user.set_password(form.password.data)
         email = Email(value=form.email.data)
