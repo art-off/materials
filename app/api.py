@@ -47,5 +47,6 @@ def add_material_for_user():
     print(secret, user_id, material_id, material_date)
     if user is None:
         return 'Invalid id', 403
-    user.add_material(material_id, material_date)
+    if user.add_material(material_id, material_date) == 'error':
+        return 'Material does not exist', 404
     return 'Added', 200

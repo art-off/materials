@@ -34,7 +34,8 @@ class User(UserMixin, db.Model):
         if User.query.get(material_id) is not None and material_id not in self.parse_materials():
             self.materials += f'{material_id}:{date}' + ', '
             db.session.commit()
-        print(self.materials)
+            return 'good'
+        return 'error'
 
     def __repr__(self):
         return f'<User {self.id} {self.name} {self.surname} {self.patronymic}>'
