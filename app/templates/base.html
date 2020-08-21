@@ -1,3 +1,4 @@
+
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
@@ -32,6 +33,8 @@
                     <li><a href="{{ url_for('add_material') }}">Добавить материал</a></li>
                     {#<li><a href="{{ url_for('search_material') }}">Найти материал</a></li>#}
                     <li><a href="{{ url_for('check_progress') }}">Проверка прогресса</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('user', id=current_user.id) }}">Обо мне</a></li>
                     {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

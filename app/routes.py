@@ -120,6 +120,19 @@ def add_files():
         material.add_files(filename)
         db.session.commit()
         file.save(os.path.join('app', app.config['UPLOAD_FOLDER'], filename))
+
+        # Если это docx (у него num=0), то делаем еще файл .txt
+        if num == '0':
+            doc = docx.Document(os.path.join('app', app.config['UPLOAD_FOLDER'], filename))
+            text_doc = []
+            for paragraph in doc.paragraphs:
+                text_doc.append(paragraph.text)
+            text_doc = '\n'.join(text_doc)
+            filename_txt = f'{material.id}({num}).txt'
+            file_txt = open(os.path.join('app', app.config['UPLOAD_FOLDER'], filename_txt), 'w')
+            file_txt.write(text_doc)
+            file_txt.close()
+
         return redirect(url_for('add_files', id=id, text='add', num=int(num)+1))
     return render_template('add_files.html', text=text, form=form, material_id=id)
 
@@ -217,8 +230,14 @@ def delete_tests(material_tests_id):
 @for_admin
 def delete_material(id):
     material = Material.query.get_or_404(id)
+
     files = re.findall(r'[^, ]+', material.files)
+    doc_name = files[0]
+    txt_name = f'{doc_name.split(".")[0]}.txt'
+    files.append(txt_name)
+
     tests = material.parse_tests()
+
     delete_files(files)
     delete_tests(tests)
     db.session.delete(material)
@@ -281,13 +300,10 @@ def user(id):
 def material(id):
     material = Material.query.get_or_404(id)
     files = material.parse_files()
-    doc = docx.Document(os.path.join('app', app.config['UPLOAD_FOLDER'], files[0]))
     name_doc = files[0]
     del files[0]
-    text_doc = []
-    for paragraph in doc.paragraphs:
-        text_doc.append(paragraph.text)
-    text_doc = '\n'.join(text_doc)
+    txt_name = f'{name_doc.split(".")[0]}.txt'
+    text_doc = open(os.path.join('app', app.config['UPLOAD_FOLDER'], txt_name)).read()
     return render_template('material.html', material=material, text_doc=text_doc, name_doc=name_doc, files=files,
                             count_tests=len(material.parse_tests()))
 
