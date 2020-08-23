@@ -96,7 +96,7 @@ def add_material():
                             files='')
         db.session.add(material)
         db.session.commit()
-        #send_email_to_everyone(material)
+        send_email_to_everyone(material)
         return redirect(url_for('add_files',id=material.id, text='txt', num=0))
     return render_template('add_material.html', form=form)
 
