@@ -1,3 +1,6 @@
+# Вот эта статья если с email снова что-то не так: #
+https://www.twilio.com/blog/2018/03/send-email-programmatically-with-gmail-python-and-flask.html
+
 ## Шо пофиксить: ##
 
 - Добавить вкладку контроля за просмотром       DONE
