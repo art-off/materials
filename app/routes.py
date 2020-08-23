@@ -110,6 +110,11 @@ def add_files():
     text = request.args.get('text')
     num = request.args.get('num')
     material = Material.query.get_or_404(id)
+    
+    fileDirectory = os.path.join('app', app.config['UPLOAD_FOLDER'])
+    if not os.path.exists(fileDirectory):
+        os.makedirs(fileDirectory)
+    
     if text == 'txt':
         form = AddTxtFilesForm()
     else:
