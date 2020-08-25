@@ -31,10 +31,18 @@ class User(UserMixin, db.Model):
 
     def add_material(self, material_id, date):
         material_id = int(material_id)
-        if User.query.get(material_id) is not None and material_id not in self.parse_materials():
+        if Material.query.get(material_id) is not None and material_id not in self.parse_materials():
             self.materials += f'{material_id}:{date}' + ', '
             db.session.commit()
             return 'good'
+#        if material_id not in self.parse_materials():
+#            print("GOOOD1")
+#            return 'good'
+#        if User.query.get(material_id) is not None:
+#            print("GOOOD2")
+#            self.materials += f'{material_id}:{date}' + ', '
+#            db.session.commit()
+#            return 'good'
         return 'error'
 
     def __repr__(self):
