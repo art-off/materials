@@ -33,7 +33,7 @@
                     <li><a href="{{ url_for('add_material') }}">Добавить материал</a></li>
                     {#<li><a href="{{ url_for('search_material') }}">Найти материал</a></li>#}
                     <li><a href="{{ url_for('check_progress') }}">Проверка прогресса</a></li>
-                    {% else %}
+                    {% elif current_user.is_authenticated %}
                     <li><a href="{{ url_for('user', id=current_user.id) }}">Обо мне</a></li>
                     {% endif %}
                 </ul>
