@@ -93,7 +93,8 @@ def add_material():
         material = Material(name=form.name.data,
                             section=form.section.data.lower(),
                             keywords=form.keywords.data,
-                            files='')
+                            files='',
+                            date=date.today().isoformat())
         db.session.add(material)
         db.session.commit()
         #send_email_to_everyone(material)
