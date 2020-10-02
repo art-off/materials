@@ -34,9 +34,9 @@ def get_user():
 def add_material_for_user():
     if 'secret' not in request.form.keys() or \
         'user_id' not in request.form.keys() or \
-            'material_id' not in request.form.keys() or \
-                'material_date' not in request.form.keys():
-                return 'Invalid DATA', 418
+        'material_id' not in request.form.keys() or \
+        'material_date' not in request.form.keys():
+            return 'Invalid DATA', 418
     secret = request.form['secret']
     if secret not in app.config['SECRET_KEYS_API']:
         return 'Invalid secret key', 402
